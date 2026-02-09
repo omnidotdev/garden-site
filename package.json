@@ -12,6 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "unleash-client": "^6.3.0",
     "@monaco-editor/react": "^4.7.0",
     "@omnidotdev/garden": "^0.1.4",
     "@radix-ui/react-dialog": "^1.1.15",

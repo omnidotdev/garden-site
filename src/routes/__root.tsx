@@ -7,10 +7,12 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  useRouteContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { Footer, Header } from "@/components/layout";
+import { fetchMaintenanceMode } from "@/lib/flags";
 import appCss from "@/lib/styles/globals.css?url";
 import { ThemeProvider } from "@/providers";
 import { getTheme } from "@/server/functions/theme";
@@ -20,7 +22,13 @@ import type { ReactNode } from "react";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
+  isMaintenanceMode: boolean;
 }>()({
+  beforeLoad: async () => {
+    const { isMaintenanceMode } = await fetchMaintenanceMode();
+
+    return { isMaintenanceMode };
+  },
   loader: () => getTheme(),
   head: () => ({
     meta: [
@@ -58,7 +66,32 @@ export const Route = createRootRouteWithContext<{
   component: RootComponent,
 });
 
+function MaintenancePage() {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-lime-900 to-lime-800 p-8 text-white">
+      <div className="text-center">
+        <div className="mb-6 text-9xl">🌱</div>
+        <h1 className="mb-4 font-bold text-4xl">Planting Seeds</h1>
+        <p className="max-w-md text-lg text-lime-200">
+          We're tending to things. Garden will bloom again soon.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function RootComponent() {
+  const { isMaintenanceMode } = useRouteContext({ from: "__root__" });
+
+  // Show maintenance page when flag is enabled
+  if (isMaintenanceMode) {
+    return (
+      <RootDocument>
+        <MaintenancePage />
+      </RootDocument>
+    );
+  }
+
   return (
     <RootDocument>
       <Outlet />
