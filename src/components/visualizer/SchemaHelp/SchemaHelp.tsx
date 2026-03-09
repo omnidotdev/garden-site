@@ -78,7 +78,7 @@ const SchemaHelp = () => (
         </li>
         <li>
           <code className="rounded bg-muted px-1 text-sm">homepage_url</code>:
-          Website URL
+          (Optional) Website URL
         </li>
         <li>
           <code className="rounded bg-muted px-1 text-sm">logo</code>: Logo URL
