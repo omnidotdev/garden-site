@@ -12,7 +12,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { Footer, Header } from "@/components/layout";
-import { fetchMaintenanceMode } from "@/lib/flags";
+import { fetchMaintenanceMode } from "@/lib/providers";
 import appCss from "@/lib/styles/globals.css?url";
 import { ThemeProvider } from "@/providers";
 import { getTheme } from "@/server/functions/theme";
