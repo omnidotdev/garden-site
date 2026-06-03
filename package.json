@@ -15,7 +15,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "@omnidotdev/garden": "^0.1.4",
-    "@omnidotdev/providers": "github:omnidotdev/providers#ddc7829",
+    "@omnidotdev/providers": "github:omnidotdev/providers#8fec17c",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
