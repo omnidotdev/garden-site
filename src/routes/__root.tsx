@@ -61,6 +61,13 @@ export const Route = createRootRouteWithContext<{
         href: "/favicon-16x16.png",
         sizes: "16x16",
       },
+      // .ico fallback for surfaces that don't read SVG favicons (link previews, iMessage)
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
     ],
   }),
   component: RootComponent,
