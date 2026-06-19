@@ -1,3 +1,5 @@
+import { LEGAL_FOOTER_LINKS } from "@omnidotdev/providers/legal";
+
 /**
  * Layout footer.
  */
@@ -17,23 +19,17 @@ const Footer = () => (
         Docs
       </a>
 
-      <a
-        className="text-muted-foreground text-xs transition-colors hover:text-primary"
-        href="https://omni.dev/legal/terms"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Terms of Service
-      </a>
-
-      <a
-        className="text-muted-foreground text-xs transition-colors hover:text-primary"
-        href="https://omni.dev/legal/privacy"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Privacy Policy
-      </a>
+      {LEGAL_FOOTER_LINKS.map((link) => (
+        <a
+          key={link.href}
+          className="text-muted-foreground text-xs transition-colors hover:text-primary"
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
   </footer>
 );
