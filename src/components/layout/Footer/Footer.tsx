@@ -19,7 +19,7 @@ const Footer = () => (
 
       <a
         className="text-muted-foreground text-xs transition-colors hover:text-primary"
-        href="https://omni.dev/terms-of-service"
+        href="https://omni.dev/legal/terms"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -28,7 +28,7 @@ const Footer = () => (
 
       <a
         className="text-muted-foreground text-xs transition-colors hover:text-primary"
-        href="https://omni.dev/privacy-policy"
+        href="https://omni.dev/legal/privacy"
         target="_blank"
         rel="noopener noreferrer"
       >
