@@ -20,7 +20,17 @@ const viteConfig = defineConfig({
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart(),
-    nitroV2Plugin({ preset: "node-server" }),
+    nitroV2Plugin({
+      preset: "node-server",
+      routeRules: {
+        "/**": {
+          headers: {
+            "Permissions-Policy": "geolocation=(), camera=(), microphone=()",
+            "Cache-Control": "public, max-age=0, must-revalidate",
+          },
+        },
+      },
+    }),
     react(),
   ],
 });

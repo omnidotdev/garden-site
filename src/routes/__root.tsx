@@ -20,6 +20,9 @@ import { getTheme } from "@/server/functions/theme";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 
+/** Canonical production URL. */
+const SITE_URL = "https://garden.omni.dev";
+
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   isMaintenanceMode: boolean;
@@ -67,6 +70,19 @@ export const Route = createRootRouteWithContext<{
         rel: "apple-touch-icon",
         sizes: "180x180",
         href: "/apple-touch-icon.png",
+      },
+      { rel: "canonical", href: SITE_URL },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Garden",
+          url: SITE_URL,
+          description: "Visualize your product, service, and other ecosystems.",
+        }),
       },
     ],
   }),

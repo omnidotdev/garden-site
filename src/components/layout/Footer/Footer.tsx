@@ -30,6 +30,15 @@ const Footer = () => (
           {link.label}
         </a>
       ))}
+
+      <a
+        className="text-muted-foreground text-xs transition-colors hover:text-primary"
+        href="https://omni.dev/legal/cookies"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Cookies
+      </a>
     </nav>
   </footer>
 );
