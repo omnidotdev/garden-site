@@ -14,6 +14,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Footer, Header } from "@/components/layout";
 import { fetchMaintenanceMode } from "@/lib/providers";
 import appCss from "@/lib/styles/globals.css?url";
+import createMetaTags from "@/lib/util/createMetaTags";
 import { ThemeProvider } from "@/providers";
 import { getTheme } from "@/server/functions/theme";
 
@@ -42,13 +43,13 @@ export const Route = createRootRouteWithContext<{
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
       {
-        title: "Garden",
+        name: "apple-mobile-web-app-status-bar-style",
+        content: "default",
       },
-      {
-        name: "description",
-        content: "Visualize your product, service, and other ecosystems.",
-      },
+      { name: "mobile-web-app-capable", content: "yes" },
+      ...createMetaTags(),
     ],
     links: [
       { rel: "stylesheet", href: appCss },
