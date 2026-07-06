@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
-    "@omnidotdev/garden": "github:omnidotdev/garden-canvas#6cd6479c3afeb2b777ca47801414276063d4dfce",
+    "@omnidotdev/garden": "github:omnidotdev/garden-canvas#cde767635f6b2487bc697512b64d11e5b3459c40",
     "@omnidotdev/providers": "github:omnidotdev/providers#3c8689d",
     "@omnidotdev/thornberry": "github:omnidotdev/thornberry#eb634c7",
     "@radix-ui/react-dialog": "^1.1.15",
