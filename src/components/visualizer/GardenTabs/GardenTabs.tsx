@@ -48,7 +48,7 @@ const GardenTabs = () => {
 
   const { activeSchema } = useGardenStore();
 
-  const [{ activeTab }, setSearchParams] = useSearchParams();
+  const [{ activeTab, connections }, setSearchParams] = useSearchParams();
 
   const [layout, setLayout] = useState("tree");
   const [loadingLayout, setLoadingLayout] = useState<string | null>(null);
@@ -114,7 +114,14 @@ const GardenTabs = () => {
 
         <div className="flex flex-1 items-center justify-center">
           {isClient ? (
-            <Garden schema={activeSchema} layout={layout} />
+            <Garden
+              schema={activeSchema}
+              layout={layout}
+              showEdges={connections}
+              onShowEdgesChange={(show) =>
+                setSearchParams({ connections: show })
+              }
+            />
           ) : (
             "Loading visualizer..."
           )}
