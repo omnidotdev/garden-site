@@ -16,7 +16,7 @@
     "@monaco-editor/react": "^4.7.0",
     "@omnidotdev/garden": "github:omnidotdev/garden-canvas#ad618b256bf456c26f3fca6ac8ad0692d133cf3a",
     "@omnidotdev/providers": "github:omnidotdev/providers#3c8689d",
-    "@omnidotdev/thornberry": "github:omnidotdev/thornberry#eb634c7",
+    "@omnidotdev/thornberry": "github:omnidotdev/thornberry#6f878df",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
