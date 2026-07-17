@@ -5,3 +5,6 @@ dist/
 .tanstack/
 src/routeTree.gen.ts
 .env*.local
+
+# tsc incremental cache: a local build artifact, rewritten by any typecheck
+*.tsbuildinfo
