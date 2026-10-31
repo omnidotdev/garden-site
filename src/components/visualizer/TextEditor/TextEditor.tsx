@@ -1,6 +1,8 @@
-import Editor from "@monaco-editor/react";
+import { json } from "@codemirror/lang-json";
+import { EditorView } from "@codemirror/view";
+import { CodeEditor } from "@omnidotdev/thornberry/code-editor";
 import { AlertCircleIcon, CheckIcon, CopyIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -22,7 +24,6 @@ interface Props {
  * Text Editor.
  */
 const TextEditor = ({ schemaText, setSchemaText, error, setError }: Props) => {
-  const [editorTheme, setEditorTheme] = useState<string>("light");
   const [copied, setCopied] = useState(false);
 
   const [{ fontSize }] = useSearchParams();
@@ -34,31 +35,60 @@ const TextEditor = ({ schemaText, setSchemaText, error, setError }: Props) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  useEffect(() => {
-    setEditorTheme(theme === "dark" ? "vs-dark" : "light");
-  }, [theme]);
+  // JSON language extension, built once so the editor is not reconfigured on every render
+  const language = useMemo(() => json(), []);
+
+  // soft wrap long lines, mirroring Monaco's `wordWrap: "on"`
+  const extensions = useMemo(() => [EditorView.lineWrapping], []);
+
+  // map the app theme and font size onto a CodeMirror theme driven by the app CSS variables
+  const editorTheme = useMemo(
+    () =>
+      EditorView.theme(
+        {
+          "&": {
+            height: "100%",
+            fontSize: `${fontSize}px`,
+            backgroundColor: "var(--background)",
+            color: "var(--foreground)",
+          },
+          ".cm-content": {
+            fontFamily:
+              "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace",
+            padding: "10px 0",
+            caretColor: "var(--foreground)",
+          },
+          ".cm-scroller": { overflow: "auto" },
+          "&.cm-focused": { outline: "none" },
+          ".cm-gutters": {
+            backgroundColor: "var(--background)",
+            color: "var(--muted-foreground)",
+            border: "none",
+          },
+          ".cm-activeLine": { backgroundColor: "var(--muted)" },
+          ".cm-activeLineGutter": { backgroundColor: "var(--muted)" },
+          ".cm-cursor, .cm-dropCursor": {
+            borderLeftColor: "var(--foreground)",
+          },
+          "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
+            { backgroundColor: "var(--accent)" },
+        },
+        { dark: theme === "dark" },
+      ),
+    [theme, fontSize],
+  );
 
   return (
     <div className="relative h-full overflow-hidden rounded-md border border-border">
-      <Editor
-        defaultLanguage="json"
+      <CodeEditor
+        className="h-full"
         value={schemaText}
+        language={language}
+        extensions={extensions}
         theme={editorTheme}
         onChange={(value) => {
           if (value) setSchemaText(value);
           setError(null);
-        }}
-        options={{
-          padding: { top: 10, bottom: 10 },
-          minimap: { enabled: false },
-          scrollBeyondLastLine: false,
-          fontSize,
-          scrollbar: {
-            vertical: "auto",
-            horizontal: "auto",
-          },
-          automaticLayout: true,
-          wordWrap: "on",
         }}
       />
 
