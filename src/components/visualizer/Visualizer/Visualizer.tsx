@@ -1,9 +1,9 @@
+import { Button } from "@omnidotdev/thornberry/button";
 import { Link } from "@tanstack/react-router";
 import { InfoIcon } from "lucide-react";
 import { useState } from "react";
 import { useIsClient } from "usehooks-ts";
 
-import { Button } from "@/components/ui/button";
 import { GardenTabs } from "@/components/visualizer";
 
 const INSTRUCTIONS_STORAGE_KEY = "garden_instructions_visible";
