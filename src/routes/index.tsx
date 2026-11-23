@@ -1,3 +1,4 @@
+import { Button } from "@omnidotdev/thornberry/button";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDownIcon,
@@ -11,7 +12,6 @@ import {
 } from "lucide-react";
 
 import { RotatingText } from "@/components/core";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({

@@ -1,22 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import {
-  Card,
   CardContent,
   CardDescription,
   CardHeader,
+  CardRoot,
   CardTitle,
-} from "@/components/ui/card";
+} from "@omnidotdev/thornberry/card";
 import {
-  Sheet,
+  SheetBackdrop,
+  SheetCloseTrigger,
   SheetContent,
   SheetDescription,
-  SheetHeader,
+  SheetPositioner,
+  SheetRoot,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@omnidotdev/thornberry/sheet";
+import {
+  TabsContent,
+  TabsList,
+  TabsRoot,
+  TabsTrigger,
+} from "@omnidotdev/thornberry/tabs";
+import { useEffect, useState } from "react";
+
 import {
   EditorActions,
   EditorControls,
@@ -45,13 +52,13 @@ const SchemaEditor = () => {
   }, [activeSchema]);
 
   return (
-    <Card className="w-full">
+    <CardRoot className="w-full">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="editor">
+        <TabsRoot defaultValue="editor">
           <TabsList>
             <TabsTrigger value="editor">JSON Editor</TabsTrigger>
             <TabsTrigger value="help">Schema Help</TabsTrigger>
@@ -60,31 +67,40 @@ const SchemaEditor = () => {
           <TabsContent value="editor" className="mt-0 flex flex-col gap-4">
             <EditorControls />
 
-            <Sheet
+            <SheetRoot
               open={editorExpanded}
-              onOpenChange={(open) => setSearchParams({ editorExpanded: open })}
+              onOpenChange={({ open }) =>
+                setSearchParams({ editorExpanded: open })
+              }
+              lazyMount
+              unmountOnExit
             >
-              <SheetContent
-                className="grid h-11/12 w-full grid-rows-layout rounded-2xl p-4"
-                side="bottom"
-              >
-                <SheetHeader className="flex flex-col items-start">
-                  <SheetTitle>{title}</SheetTitle>
-                  <SheetDescription>{description}</SheetDescription>
-                </SheetHeader>
+              <SheetBackdrop className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in" />
+              <SheetPositioner>
+                <SheetContent
+                  className="grid h-11/12 w-full grid-rows-layout gap-4 rounded-2xl p-4 shadow-lg"
+                  side="bottom"
+                >
+                  <div className="flex flex-col items-start gap-1.5 p-4">
+                    <SheetTitle>{title}</SheetTitle>
+                    <SheetDescription>{description}</SheetDescription>
+                  </div>
 
-                <EditorControls />
+                  <EditorControls />
 
-                <TextEditor
-                  error={error}
-                  schemaText={schemaText}
-                  setSchemaText={setSchemaText}
-                  setError={setError}
-                />
+                  <TextEditor
+                    error={error}
+                    schemaText={schemaText}
+                    setSchemaText={setSchemaText}
+                    setError={setError}
+                  />
 
-                <EditorActions schemaText={schemaText} setError={setError} />
-              </SheetContent>
-            </Sheet>
+                  <EditorActions schemaText={schemaText} setError={setError} />
+
+                  <SheetCloseTrigger />
+                </SheetContent>
+              </SheetPositioner>
+            </SheetRoot>
 
             <div className="h-[400px]">
               <TextEditor
@@ -101,9 +117,9 @@ const SchemaEditor = () => {
           <TabsContent value="help">
             <SchemaHelp />
           </TabsContent>
-        </Tabs>
+        </TabsRoot>
       </CardContent>
-    </Card>
+    </CardRoot>
   );
 };
 

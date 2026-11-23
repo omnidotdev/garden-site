@@ -1,11 +1,15 @@
 import { json } from "@codemirror/lang-json";
 import { EditorView } from "@codemirror/view";
+import {
+  AlertDescription,
+  AlertRoot,
+  AlertTitle,
+} from "@omnidotdev/thornberry/alert";
+import { Button } from "@omnidotdev/thornberry/button";
 import { CodeEditor } from "@omnidotdev/thornberry/code-editor";
 import { AlertCircleIcon, CheckIcon, CopyIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import { useSearchParams } from "@/lib/hooks";
 import { useTheme } from "@/providers";
 
@@ -107,13 +111,13 @@ const TextEditor = ({ schemaText, setSchemaText, error, setError }: Props) => {
         </Button>
 
         {error && (
-          <Alert variant="destructive">
+          <AlertRoot variant="error">
             <AlertCircleIcon size={16} />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription className="max-h-32 overflow-auto font-mono text-xs">
               {error}
             </AlertDescription>
-          </Alert>
+          </AlertRoot>
         )}
       </div>
     </div>

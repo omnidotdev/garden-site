@@ -1,12 +1,17 @@
 "use client";
 
 import { Garden, getLayout, listLayouts } from "@omnidotdev/garden";
+import { Button } from "@omnidotdev/thornberry/button";
+import {
+  TabsContent,
+  TabsList,
+  TabsRoot,
+  TabsTrigger,
+} from "@omnidotdev/thornberry/tabs";
 import { BarChartIcon, CodeIcon, Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { useIsClient } from "usehooks-ts";
 
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SchemaEditor } from "@/components/visualizer";
 import { useSearchParams } from "@/lib/hooks";
 import { useGardenStore } from "@/lib/hooks/store";
@@ -71,7 +76,7 @@ const GardenTabs = () => {
   };
 
   return (
-    <Tabs
+    <TabsRoot
       value={activeTab}
       onValueChange={() =>
         setSearchParams({
@@ -99,7 +104,7 @@ const GardenTabs = () => {
               <Button
                 key={name}
                 size="sm"
-                variant={name === layout ? "default" : "outline"}
+                variant={name === layout ? "solid" : "outline"}
                 disabled={loadingLayout !== null}
                 onClick={() => selectLayout(name)}
               >
@@ -131,7 +136,7 @@ const GardenTabs = () => {
       <TabsContent value="edit" className="mt-6">
         <SchemaEditor />
       </TabsContent>
-    </Tabs>
+    </TabsRoot>
   );
 };
 

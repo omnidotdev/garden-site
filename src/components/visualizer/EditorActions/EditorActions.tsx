@@ -1,7 +1,7 @@
 import { Convert } from "@omnidotdev/garden";
+import { Button } from "@omnidotdev/thornberry/button";
 import { DownloadIcon, RotateCcwIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useGardenStore } from "@/lib/hooks/store";
 
 import type { GardenSchema } from "@omnidotdev/garden";
@@ -49,9 +49,7 @@ const EditorActions = ({ schemaText, setError }: Props) => {
   return (
     <div className="flex w-full justify-between">
       <div className="flex items-center gap-2">
-        <Button onClick={validateAndApply} variant="default">
-          Apply Changes
-        </Button>
+        <Button onClick={validateAndApply}>Apply Changes</Button>
 
         <Button onClick={() => reset()} variant="outline">
           <RotateCcwIcon size={16} />
